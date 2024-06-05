@@ -5,5 +5,5 @@ function solution(n) {
         a = b;
         b = temp;
     }
-    return n === 0 ? a : b;
+    return b
 }
