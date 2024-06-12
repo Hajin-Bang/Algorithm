@@ -8,5 +8,4 @@ function solution(brown, yellow) {
             }
         }
     }
-    return [];
 }
