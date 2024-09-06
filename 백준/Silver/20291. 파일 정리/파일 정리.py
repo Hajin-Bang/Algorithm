@@ -1,8 +1,11 @@
-N = int(input())
+import sys
+input = sys.stdin.read().splitlines()
+
+N = int(input[0])
 
 files = {}
-for _ in range(N):
-    file = input().split(".")
+for i in range(1, N+1):
+    file = input[i].split(".")
     extension = file[1]
     if (extension in files):
         files[extension] += 1
