@@ -22,4 +22,11 @@ def solution(phone_book):
     return True 
         
     
+    
+'''
+for key in phone_number:
+    if key == start:
+        return False
+'''
+    
         
