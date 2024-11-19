@@ -3,31 +3,38 @@ from collections import deque
 
 input = sys.stdin.readline
 
-def bfs(x, y):
-    queue = deque([(x, y)])
-    visited[x][y] = 1
-    while queue: 
-        x, y = queue.popleft()
-        if floor[x][y] == '-':
-            if y + 1 < m and not visited[x][y + 1] and floor[x][y + 1] == '-':
-                visited[x][y+1] = 1
-                queue.append((x, y+1))
-        elif floor[x][y] == '|':
-            if x + 1 < n and not visited[x+1][y] and floor[x+1][y] == '|':
-                visited[x+1][y] = 1
-                queue.append((x+1, y))
+N,M = map(int, input().split())
+ground = []
+for _ in range(N):
+    line = input().strip()
+    ground.append(list(line))
+visited = [[False] * M for _ in range(N)]
+lr_directions = [(0,1),(0,-1)]
+ud_directions = [(1,0),(-1,0)]
+board = 0
 
+def bfs(x,y):
+    queue = deque([(x,y)])
+    visited[x][y] = True
+    while queue:
+        cx, cy = queue.popleft()
+        if ground[x][y] == '-':
+            for dx, dy in lr_directions:
+                nx, ny = cx + dx, cy + dy
+                if 0 <= nx < N and 0 <= ny < M and not visited[nx][ny] and ground[nx][ny] == '-': 
+                    visited[nx][ny] = True
+                    queue.append((nx, ny))
+        elif ground[x][y] == '|':
+            for dx, dy in ud_directions:  
+                nx, ny = cx + dx, cy + dy
+                if 0 <= nx < N and 0 <= ny < M and not visited[nx][ny] and ground[nx][ny] == '|':
+                    visited[nx][ny] = True
+                    queue.append((nx, ny))
 
-
-n,m = map(int, input().split())
-floor = [list(input().strip()) for _ in range(n)]
-visited = [[0] * m for _ in range(n)] # 방문 여부를 모두 false로 처리
-count = 0
-
-for i in range(n):
-    for j in range(m):
+for i in range(N):
+    for j in range(M):
         if not visited[i][j]:
-            bfs(i, j)
-            count += 1
+            bfs(i,j)
+            board += 1
 
-print(count)
+print(board)
