@@ -4,7 +4,7 @@ from collections import deque
 input = sys.stdin.readline
 N = int(input())
 
-def dfs(x,y,height):
+def bfs(x,y,height):
     queue = deque([(x, y)])
     visited[x][y] = True
     
@@ -31,11 +31,10 @@ max_areas = 0
 for height in range(min_height-1, max_height):
     visited = [[False] * N for _ in range(N)]
     areas = 0
-
     for i in range(N):
         for j in range(N):
             if not visited[i][j] and heights[i][j] > height:
-                dfs(i, j, height)
+                bfs(i, j, height)
                 areas += 1
     max_areas = max(max_areas, areas)
 
