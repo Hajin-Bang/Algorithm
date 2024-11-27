@@ -1,4 +1,3 @@
-
 import sys
 
 input = sys.stdin.readline
@@ -12,8 +11,7 @@ for _ in range(N):
 coins.sort(reverse=True)
 count = 0
 for coin in coins:
-    value = K // coin
-    count += value
+    count += K // coin
     K %= coin
 
     if K == 0:
